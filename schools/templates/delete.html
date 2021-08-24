@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="card-body">
+            <form action="{% url 'delete' school.pk %}" method="POST">
+                {% csrf_token %}
+                <p>Name</p> {{ school.name }}
+                <p>Content</p>{{ school.content }}
+                <br><br>
+                <input type="submit" value="Delete">
+            </form>
+            <br>
+            <a href="{% url 'detail' school.pk %}" class="btn btn-primary">Back</a> 
+        </div>
+    </div>
+
+{% endblock content %}
