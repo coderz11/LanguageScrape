@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="card-body">
+            <form action="{% url 'create' %}" method="POST">
+                {% csrf_token %}
+                <p>Name</p>
+                <input type="text" name="name">
+                <br><br>
+                <p>Content</p>
+                <textarea name="content">{{ data }}</textarea>
+                <br><br>
+                <label for="category">Category :</label>
+                <select name="category" id="category">
+                    <option value="Local">Local</option>
+                    <option value="Japan">Japan</option>
+                    <option value="France">France</option>
+                    <option value="Germany">Germany</option>
+                </select> 
+                <br><br>
+                <input type="submit" value="Create New">
+            </form>
+            <br>
+            <a href="{% url 'list' %}" class="btn btn-primary">Back</a>            
+        </div>
+
+    </div>
+
+{% endblock content %}

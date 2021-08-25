@@ -1,10 +1,13 @@
 import schools
 from schools.models import Schools
 from django.shortcuts import render, redirect
+from django.db import models
+from bs4 import BeautifulSoup
+import requests
 
 # Create your views here.
-def main(request):
-    return render(request, 'main.html', {'message':'Welcome to LanguageScrape'})
+def index(request):
+    return render(request, 'index.html', {'message':'Welcome to LanguageScrape'})
 
 def list(request):
     schools_list = Schools.objects.all()
@@ -21,6 +24,28 @@ def create(request):
         return redirect('list')
     else:
         return render(request, 'create.html')
+
+        
+def scrape(request):
+    url = 'https://www.icls.com.my/'
+    response = requests.get(url)
+    html = response.content
+    soup = BeautifulSoup(html, 'html.parser')
+
+    datas = []
+    all_h3 = soup.select('div.box-text-inner h3 a')
+    for h3 in all_h3:
+        data = h3.get_text(strip=True)
+        datas.append(data)
+    latestdatas = set(datas)
+        
+
+    if request.method == 'POST':    
+        school = Schools(name=request.POST.get('name'), content=request.POST.get('content'), category=request.POST.get('category'))
+        school.save()
+        return redirect('list')
+    else:
+        return render(request, 'scrape.html', {'data': latestdatas})
 
 def update(request, pk):
     school = Schools.objects.get(pk=pk)
