@@ -3,6 +3,7 @@
 {% block content %}
     <div class="container">
         <br><a href="{% url 'create' %}" class="btn btn-primary">Create New</a>
+    <a href="{% url 'logout' %}" class="btn btn-primary">Logout</a>        
         <br><br>
         {% for school in schools_list %}
             <div class="card">
@@ -14,7 +15,6 @@
                 </div>
             </div>
         {% endfor %}
-
     </div>
 
 {% endblock content %}

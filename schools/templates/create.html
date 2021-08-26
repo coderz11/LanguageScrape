@@ -17,12 +17,15 @@
                     <option value="Japan">Japan</option>
                     <option value="France">France</option>
                     <option value="Germany">Germany</option>
-                </select> 
+                </select>
+                <br><p>Price</p>
+                <textarea name="price">{{ school.price }}</textarea><br>
                 <br><br>
                 <input type="submit" value="Create New">
             </form>
             <br>
-            <a href="{% url 'list' %}" class="btn btn-primary">Back</a>            
+            <a href="{% url 'list' %}" class="btn btn-primary">Back</a>     
+            <a href="{% url 'scrape' %}" class="btn btn-primary">Scrape</a>       
         </div>
 
     </div>

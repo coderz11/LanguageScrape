@@ -10,6 +10,7 @@ class Schools(models.Model):
     category = models.CharField(
         max_length=50, choices=CATEGORY, default='Local', null=True
     )
+    price = models.CharField(max_length=100, default='70 per hour')
 
     def __str__(self):
         return self.name
